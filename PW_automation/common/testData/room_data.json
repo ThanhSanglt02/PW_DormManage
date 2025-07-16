@@ -1,0 +1,15 @@
+{
+    "roomNumber": "101",
+    "floor": "1",
+    "capacity": "2",
+    "price": "1000000",
+    "buildingOptions": [
+        { "value": "R1", "label": "R1" },
+        { "value": "R2", "label": "R2" }
+    ],
+    "typeOptions": [
+        { "value": "standard", "label": "Tiêu chuẩn" },
+        { "value": "deluxe", "label": "Cao cấp" },
+        { "value": "suite", "label": "Suite" }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "buttonCreateRoom": "//button[contains(text(), 'Tạo phòng mới')]",
+    "buttonBack": "//button[contains(text(), 'Quay lại')]",
+    "inputRoomNumber": "//input[@name='roomNumber']",
+    "inputFloor": "//input[@name='floor']",
+    "inputRoomCapacity": "//input[@name='capacity']",
+    "inputRoomPrice": "//input[@name='price']",
+    "inputRoomBuilding": "//input[@name='building']",
+    "inputRoomType": "//input[@name='type']",
+    "buttonAdd": "//button[contains(text(),'Thêm phòng')]",
+    "buttonCancel": "//button[contains(text(),'Hủy')]"
+}

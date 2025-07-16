@@ -1,0 +1,6 @@
+{
+    "urlLoginPage": "http://localhost:3000/login",
+    "usernameInput": "//input[@placeholder = 'Nhập tên đăng nhập']",
+    "passwordInput": "//input[@placeholder = 'Nhập mật khẩu']",
+    "loginButton": "// button[@type='submit']"
+}
