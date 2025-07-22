@@ -12,15 +12,21 @@ exports.CreateRoom = class CreateRoom extends HomePage {
 
     async createRoom(roomNumber, floor, capacity, price, building, type) {
         await this.page.fill(createRoomLocators.inputRoomNumber, roomNumber);
-
-        await this.page.selectOption(createRoomLocators.inputRoomBuilding, building);   
-
+        await this.page.click(createRoomLocators.inputRoomBuilding);
+        await this.selectValueBuilding(building);
         await this.page.fill(createRoomLocators.inputFloor, floor);
         await this.page.fill(createRoomLocators.inputRoomCapacity, capacity);
-        await this.page.selectOption(createRoomLocators.inputRoomType, type);
+        await this.page.click(createRoomLocators.inputRoomType);
+        await this.selectValueType(type);
         await this.page.fill(createRoomLocators.inputRoomPrice, price);
         await this.page.click(createRoomLocators.buttonAdd);
     }
-
-    
+    async selectValueBuilding (value) {
+        const locator = createRoomLocators.valueRoomBuilding.replace('${value}', value);
+        await this.page.click(locator);
+    }
+    async selectValueType (value) {
+        const locator = createRoomLocators.valueRoomType.replace('${value}', value);
+        await this.page.click(locator);
+    }
 }

@@ -5,8 +5,10 @@
     "inputFloor": "//input[@name='floor']",
     "inputRoomCapacity": "//input[@name='capacity']",
     "inputRoomPrice": "//input[@name='price']",
-    "inputRoomBuilding": "//input[@name='building']",
-    "inputRoomType": "//input[@name='type']",
+    "inputRoomBuilding": "//*[@id=':rb:']",
+    "valueRoomBuilding": "//*[@id=':rd:']/li[@data-value='${value}']",
+    "inputRoomType": "//*[@id=':rj:']",
+    "valueRoomType": "//*[@id=':rl:']/li[@data-value='${value}']",
     "buttonAdd": "//button[contains(text(),'Thêm phòng')]",
     "buttonCancel": "//button[contains(text(),'Hủy')]"
 }
