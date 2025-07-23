@@ -2,13 +2,16 @@
   "name": "pw_automation",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "refresh-session": "node setupLogin.js",
+    "test": "npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.53.2",
+    "@playwright/test": "^1.54.1",
     "@types/node": "^24.0.10"
   }
 }

@@ -14,11 +14,12 @@ test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     createRoomPage = new CreateRoom(page);
+    
+    await page.goto('http://localhost:3000/admin');
   });
 
 test.only('TC_CRTROOM_01 - Kiểm tra điều hướng đến trang tạo phòng', async ({ page }) => {
-    await loginPage.goToLoginPage();
-    await loginPage.login(user_data.validUser.username, user_data.validUser.password);
+    await page.pause()
     await homePage.goToCreateRoomPage();  
     await createRoomPage.clickButtonCreateRoom();
     await expect(page).toHaveURL('http://localhost:3000/admin/room/add');
