@@ -10,5 +10,6 @@
     "inputRoomType": "//*[@id=':rj:']",
     "valueRoomType": "//*[@id=':rl:']/li[@data-value='${value}']",
     "buttonAdd": "//button[contains(text(),'Thêm phòng')]",
-    "buttonCancel": "//button[contains(text(),'Hủy')]"
+    "buttonCancel": "//button[contains(text(),'Hủy')]",
+    "message": ""
 }
