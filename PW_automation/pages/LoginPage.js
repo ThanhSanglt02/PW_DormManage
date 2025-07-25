@@ -14,7 +14,6 @@ exports.LoginPage = class LoginPage {
         await this.page.fill(loginLocators.usernameInput, username);
         await this.page.fill(loginLocators.passwordInput, password);
         await this.page.click(loginLocators.loginButton);
-
         await this.page.waitForNavigation();
 
     }

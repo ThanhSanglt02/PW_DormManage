@@ -1,5 +1,6 @@
 const createRoomLocators = require('../common/locators/createRoom_locator.json'); // .. quay ve root cua du an la PW_autotmation
 const { HomePage } = require('./HomePage');
+import { expect } from '@playwright/test';
  
 exports.CreateRoom = class CreateRoom extends HomePage {
     constructor(page) {
@@ -10,14 +11,58 @@ exports.CreateRoom = class CreateRoom extends HomePage {
         await this.page.click(createRoomLocators.buttonCreateRoom);
     }
    
-    async getMessage() {
-        
+    async aserrtGetMessage(expected) {
+        try {
+            const locator = this.page.locator(createRoomLocators.message);
+            await locator.waitFor({ timeout: 3000 }); // chờ xuất hiện
+    
+            const actual = await locator.textContent();
+            const actualTrimmed = actual?.trim();
+            const expectedTrimmed = expected.trim();
+
+            if (actualTrimmed === expectedTrimmed) {
+                return actualTrimmed
+            }
+            return actualTrimmed
+
+        } catch(e) {
+            console.log(e.message) //"Không lấy được message | Hết session timeout"
+            return 'failed'
+        }
     }
-    // async getMessage(locator) {
-    //     // Truy cập thông điệp bằng JS (nếu muốn kiểm tra đúng text):
-    //     const msg = await page.locator(locator).evaluate(el => el.validationMessage);
-    //     expect(msg).toContain('Please fill out this field');
-    // }
+   
+    async getLimit2Character(roomNumber, floor, capacity, price, building, type) {
+        if (roomNumber) {
+            await this.page.fill(createRoomLocators.inputRoomNumber, roomNumber);
+        }
+        if (building) {
+            await this.page.click(createRoomLocators.inputRoomBuilding);
+            await this.selectValueBuilding(building);
+        }
+        if (floor) {
+            await this.page.fill(createRoomLocators.inputFloor, floor);
+            
+        }
+        if (capacity) {
+            await this.page.fill(createRoomLocators.inputRoomCapacity, capacity);
+        }
+        if (type) {
+            await this.page.click(createRoomLocators.inputRoomType);
+            await this.selectValueType(type);
+        }
+        if (price) {
+            await this.page.fill(createRoomLocators.inputRoomPrice, price);
+        }
+    
+        // click "Thêm"
+        await this.page.click(createRoomLocators.buttonAdd);
+        const element = this.page.locator(createRoomLocators.inputFloor);
+        const actualValue = await element.inputValue();
+        if (actualValue > 2) {
+            return actualValue.length
+        }
+        return null;
+    }
  
     async createRoom(roomNumber, floor, capacity, price, building, type) {
         

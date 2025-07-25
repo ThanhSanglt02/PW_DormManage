@@ -1,8 +1,10 @@
 {
-    "roomNumber": "5555",
-    "floor": "1",
+    "roomNumber": "505",
+    "roomNumberLimit": "6546546859468054342342386584680548658406895486084690584906854906859406890548609548609489860854680584906890045860548640",
+    "floor": "5",
     "capacity": "2",
     "price": "1000000",
+    "price_invalid": "-1000",
     "buildingOptions": [
         { "value": "R1", "label": "R1" },
         { "value": "R2", "label": "R2" }
