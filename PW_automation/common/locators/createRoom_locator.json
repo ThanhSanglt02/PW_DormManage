@@ -1,15 +1,15 @@
 {
-    "buttonCreateRoom": "//button[contains(text(), 'Tạo phòng mới')]",
+    "buttonCreateRoom": "//*[@id='root']/div/div/div[2]/div[1]/div", 
     "buttonBack": "//button[contains(text(), 'Quay lại')]",
     "inputRoomNumber": "//input[@name='roomNumber']",
-    "inputFloor": "//input[@name='floor']",
     "inputRoomCapacity": "//input[@name='capacity']",
     "inputRoomPrice": "//input[@name='price']",
-    "inputRoomBuilding": "//*[@id=':rb:']",
-    "valueRoomBuilding": "//*[@id=':rd:']/li[@data-value='${value}']",
-    "inputRoomType": "//*[@id=':rj:']",
-    "valueRoomType": "//*[@id=':rl:']/li[@data-value='${value}']",
-    "buttonAdd": "//button[contains(text(),'Thêm phòng')]",
-    "buttonCancel": "//button[contains(text(),'Hủy')]",
-    "message": "//div/div/div[2]/div[2]"
+    "inputRoomBuilding": "//label[contains(text(), 'Tòa nhà')]/ancestor::div[contains(@class, 'MuiGrid-item')]",
+    "valueRoomBuilding": "//ul[@class='MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list']/li[@data-value='${value}']",
+    "inputRoomType": "//label[contains(text(), 'Loại phòng')]/ancestor::div[contains(@class, 'MuiGrid-item')]",  
+    "valueRoomType": "//ul[@class='MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list']/li[@data-value='${value}']", 
+    "inputStatus": "//label[contains(text(), 'Trạng thái')]/ancestor::div[contains(@class, 'MuiGrid-item')]",
+    "valueStatus": "//ul[@class='MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list']/li[@data-value='${value}']",
+    "buttonAdd": "//button[@type='submit' and contains(normalize-space(text()), 'Đăng ký')]",
+    "message": "//*[@id='root']/div/div/div[2]/form/div/div[1]/div/div[2]"
 }

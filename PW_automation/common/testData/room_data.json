@@ -1,6 +1,6 @@
 {
     "roomNumber": "505",
-    "roomNumberLimit": "6546546859468054342342386584680548658406895486084690584906854906859406890548609548609489860854680584906890045860548640",
+    "roomNumberLimit": "65465468342342386584680548658406895486084690584906854906859406890548609548609489860854680584906890045860548640",
     "floor": "5",
     "capacity": "2",
     "price": "1000000",
@@ -13,5 +13,11 @@
         { "value": "standard", "label": "Tiêu chuẩn" },
         { "value": "deluxe", "label": "Cao cấp" },
         { "value": "suite", "label": "Suite" }
+    ],
+    "statusOptions": [
+        { "value": "Đã có Người ở", "label": "Đã có Người ở" },
+        { "value": "Room đầy", "label": "Room đầy" },
+        { "value": "maintenance", "label": "Đang bảo trì" },
+        { "value": "available", "label": "Còn trống" }
     ]
 }

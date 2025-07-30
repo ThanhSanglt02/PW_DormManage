@@ -1,4 +1,5 @@
 const homeLocators = require('../common/locators/home_locator.json');
+const common = require('../common/Common')
 const { LoginPage } = require('./LoginPage');
 
 exports.HomePage = class HomePage extends LoginPage {
@@ -7,6 +8,11 @@ exports.HomePage = class HomePage extends LoginPage {
     }
 
     async goToCreateRoomPage() {
-        await this.page.click(homeLocators.cardRoomList);
+        await this.page.click(homeLocators.cardRoomManage);
+    };
+
+    async goToListRoomPage() {
+        common.waitForSelector(this.page, homeLocators.cardRoomList, 10000)
+        await this.page.click(homeLocators.cardRoomList)
     }
 }

@@ -5,5 +5,9 @@
     
     "invalidUser": { 
         "username": "wrong", "password": "wrong" 
+    },
+    "studentUser": {
+        "username": "3333", "password": "pass" 
     }
+
 }
