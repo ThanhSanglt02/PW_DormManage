@@ -1,6 +1,6 @@
 {
     "cardRoomManage": "//div/a[@href='/admin/room-registration']",
     "cardRoomList": "//div/a[@href='/admin/room-list']",
-    "cardRoomList": "//a[@href='/admin/room-list']"
+    "cardRegisterStudent": "//div/a[@href='/admin/student-registration']"
 
 }

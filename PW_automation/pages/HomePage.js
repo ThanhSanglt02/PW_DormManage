@@ -15,4 +15,9 @@ exports.HomePage = class HomePage extends LoginPage {
         common.waitForSelector(this.page, homeLocators.cardRoomList, 10000)
         await this.page.click(homeLocators.cardRoomList)
     }
+
+    async goToRegisterStudentPage() {
+        common.waitForSelector(this.page, homeLocators.cardRegisterStudent, 10000)
+        await this.page.click(homeLocators.cardRegisterStudent)
+    }
 }

@@ -1,7 +1,7 @@
 import {expect} from '@playwright/test'
 import { HomePage } from './HomePage';
 
-const searchRoom = require('../common/locators/search_locator.json'); // .. quay ve root cua du an la PW_autotmation 
+const listRoomLocator = require('../common/locators/listRoom_locator.json'); // .. quay ve root cua du an la PW_autotmation 
 
 
 exports.ListRoom = class ListRoom extends HomePage { 
@@ -12,11 +12,11 @@ exports.ListRoom = class ListRoom extends HomePage {
 
     async searchRoom(value) {
         const valueText = value.toString();
-        await this.page.fill(searchRoom.inputSearchRoom, valueText)
+        await this.page.fill(listRoomLocator.inputSearchRoom, valueText)
     }
 
     async checkNumberofRoomExist(number) {
-        const el = this.page.locator(searchRoom.numberOfRoom)
+        const el = this.page.locator(listRoomLocator.numberOfRoom)
         const actual = await el.innerText()
 
         // Chuyển number thành chuỗi
