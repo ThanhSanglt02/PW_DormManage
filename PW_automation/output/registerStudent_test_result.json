@@ -1,0 +1,11 @@
+[
+  {
+    "title": "TC_RGSTUDENT_01 - Kiểm tra đăng ký sinh viên thành công với thông tin hợp lệ",
+    "status": "failed",
+    "duration": "2931ms",
+    "expectedStatus": "passed",
+    "expected": "Đăng ký sinh viên thành công",
+    "actual": "Mã sinh viên đã tồn tại",
+    "time": "31/07/2025 12:02:02"
+  }
+]

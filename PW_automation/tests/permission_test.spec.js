@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test';
+import {test} from '../tests/base_test.spec';
+import { expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 
 
@@ -23,11 +24,14 @@ test.describe('test permission rule', ()=> {
     test('TC_CRTROOM_12 - Kiểm tra việc tạo phòng khi login với role Student', async({page}) => {
       const loginPage = new LoginPage(page);
       // Đăng nhập với role Student
-      await loginPage.goToLoginPage()
       await loginPage.login(user_data.studentUser.username, user_data.studentUser.password)
     
       // Truy cập url tao phong cua Admin
       await page.goto('http://localhost:3000/admin/room-registration');
+
+      // Gán actual/expected vào testInfo
+      testInfo.annotations.push({ type: 'actual', description: result });
+      testInfo.annotations.push({ type: 'expected', description: 'Đăng ký sinh viên thành công' });
     
       // kiểm tra không còn ở trang /create-room nữa
       await expect(page).not.toHaveURL(/\/room-registration$/);  //kiểm tra URL hiện tại không kết thúc bằng /room-registration

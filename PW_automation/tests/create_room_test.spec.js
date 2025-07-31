@@ -7,7 +7,6 @@ import { ListRoom } from '../pages/ListRoom';
 
 const user_data = require('../common/testData/user_data.json')
 const room_data = require('../common/testData/room_data.json');
-const common = require('../common/Common');
 
 let loginPage;
 let homePage;

@@ -14,6 +14,21 @@ const common = {
            await page.waitForSelector(locator, {timeout: seconds});
         }
 
+    },
+
+    async splitStringDate(value) {
+        if (!/[-/]/.test(value)) {
+            console.log("Chuỗi không chứa ký tự - hoặc /");
+        }
+        else {
+            const value_arr = value.split(/[-/]/);
+            return value_arr
+        }
+    },
+
+    async getTestInfo(testInfo, expect, actual) {
+        testInfo.annotations.push({ type: 'actual', description: actual });
+        testInfo.annotations.push({ type: 'expected', description: expect });
     }
 }
 module.exports = common

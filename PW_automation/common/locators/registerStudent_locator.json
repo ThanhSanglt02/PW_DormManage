@@ -2,11 +2,15 @@
     "idStudent": "input[name='studentId']",
     "inputName": "//input[@name='fullName']",
     "selectorDateofBirth": "//input[@name='dateOfBirth']",
+    "dateofBirth": "input[name='dateOfBirth']",
     "inputGioiTinh": "//label[contains(text(), 'Giới tính')]/following-sibling::div//div[@role='combobox']",
+    "valueGioiTinh": "//ul[@class='MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list']/li[@data-value='${value}']",
     "inputAdress":"input[name='address']",
     "inputPhone": "input[name='phone']",
     "inputEmail": "//input[@name='email']",
     "selectorSinhVienNamThu": "//label[contains(text(), 'Sinh Viên Năm Thứ')]/ancestor::div[contains(@class, 'MuiFormControl-root')]//div[@role='combobox']",
-    "inputPassword": "input[name='password']"
-
+    "valueNamHoc": "//ul[@class='MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list']/li[@data-value='${value}']",
+    "inputPassword": "input[name='password']",
+    "btnRegister": "//button[@type='submit' and contains(normalize-space(text()), 'Đăng ký')]",
+    "message": "//*[@id='root']/div/div/div[2]/div[2]"
 }
