@@ -1,11 +1,164 @@
 [
   {
-    "title": "TC_RGSTUDENT_01 - Kiểm tra đăng ký sinh viên thành công với thông tin hợp lệ",
-    "status": "failed",
-    "duration": "2931ms",
+    "title": "TC_RGSTUDENT_04 - Kiểm tra khi đăng kí sinh viên với mã sinh viên đã tồn tại ",
+    "status": "passed",
+    "duration": "9824ms",
     "expectedStatus": "passed",
-    "expected": "Đăng ký sinh viên thành công",
-    "actual": "Mã sinh viên đã tồn tại",
-    "time": "31/07/2025 12:02:02"
+    "expected": "Mã sinh viên đã được sử dụng làm tên đăng nhập",
+    "actual": "Mã sinh viên đã được sử dụng làm tên đăng nhập",
+    "time": "03/08/2025 14:22:22"
+  },
+  {
+    "title": "TC_RGSTUDENT_01 - Kiểm tra đăng ký sinh viên thành công với thông tin hợp lệ",
+    "status": "passed",
+    "duration": "10287ms",
+    "expectedStatus": "passed",
+    "expected": "Đăng ký sinh viên thành công!",
+    "actual": "Đăng ký sinh viên thành công!",
+    "time": "03/08/2025 14:22:23"
+  },
+  {
+    "title": "TC_RGSTUDENT_02 - Kiểm tra đăng ký sinh viên khi nhập Mã sinh viên chỉ chứa chữ",
+    "status": "failed",
+    "duration": "10460ms",
+    "expectedStatus": "passed",
+    "expected": "Mã sinh viên không hợp lệ",
+    "actual": "Đăng ký sinh viên thành công!",
+    "time": "03/08/2025 14:22:23"
+  },
+  {
+    "title": "TC_RGSTUDENT_03 - Kiểm tra đăng ký sinh viên khi nhập Mã sinh viên chỉ chứa kí tự đặc biệt",
+    "status": "failed",
+    "duration": "10643ms",
+    "expectedStatus": "passed",
+    "expected": "Mã sinh viên không hợp lệ",
+    "actual": "Đăng ký sinh viên thành công!",
+    "time": "03/08/2025 14:22:23"
+  },
+  {
+    "title": "TC_RGSTUDENT_05 - Kiểm tra việc đăng ký sv với nhiều ký tự space vào trường Mã sinh viên",
+    "status": "failed",
+    "duration": "5203ms",
+    "expectedStatus": "passed",
+    "expected": "Mã sinh viên không hợp lệ",
+    "actual": "Lỗi server",
+    "time": "03/08/2025 14:22:28"
+  },
+  {
+    "title": "TC_RGSTUDENT_06 - Kiểm tra việc đăng ký sv với Số điện thoại không bắt đầu với 0",
+    "status": "failed",
+    "duration": "5793ms",
+    "expectedStatus": "passed",
+    "expected": "Số điện thoại không hợp lệ",
+    "actual": "Đăng ký sinh viên thành công!",
+    "time": "03/08/2025 14:22:29"
+  },
+  {
+    "title": "TC_RGSTUDENT_08 - Kiểm tra việc đăng ký sv với Số điện thoại > 10 ký tự",
+    "status": "passed",
+    "duration": "5483ms",
+    "expectedStatus": "passed",
+    "expected": "Số điện thoại không hợp lệ",
+    "actual": "Số điện thoại không hợp lệ",
+    "time": "03/08/2025 14:22:32"
+  },
+  {
+    "title": "TC_RGSTUDENT_07 - Kiểm tra việc đăng ký sv với Số điện thoại < 10 ký tự",
+    "status": "passed",
+    "duration": "5748ms",
+    "expectedStatus": "passed",
+    "expected": "Số điện thoại không hợp lệ",
+    "actual": "Số điện thoại không hợp lệ",
+    "time": "03/08/2025 14:22:32"
+  },
+  {
+    "title": "TC_RGSTUDENT_11 - Kiểm tra thông báo lỗi khi nhập email sai định dạng",
+    "status": "failed",
+    "duration": "6450ms",
+    "expectedStatus": "passed",
+    "expected": "Email không hợp lệ",
+    "actual": "Đăng ký sinh viên thành công!",
+    "time": "03/08/2025 14:22:38"
+  },
+  {
+    "title": "TC_RGSTUDENT_09 - Kiểm tra chức năng đăng ký khi nhập ký tự đặc biệt vào trường phone",
+    "status": "passed",
+    "duration": "6802ms",
+    "expectedStatus": "passed",
+    "expected": "Số điện thoại không hợp lệ",
+    "actual": "Số điện thoại không hợp lệ",
+    "time": "03/08/2025 14:22:39"
+  },
+  {
+    "title": "TC_RGSTUDENT_12 - Kiểm tra thông báo lỗi khi nhập email sai định dạng",
+    "status": "passed",
+    "duration": "7017ms",
+    "expectedStatus": "passed",
+    "expected": "Email không hợp lệ",
+    "actual": "Email không hợp lệ",
+    "time": "03/08/2025 14:22:39"
+  },
+  {
+    "title": "TC_RGSTUDENT_10 - Kiểm tra việc đăng ký với email đã tồn tại",
+    "status": "passed",
+    "duration": "6920ms",
+    "expectedStatus": "passed",
+    "expected": "Email đã tồn tại",
+    "actual": "Email đã tồn tại",
+    "time": "03/08/2025 14:22:39"
+  },
+  {
+    "title": "TC_RGSTUDENT_14 - Kiểm tra việc đăng ký khi nhập 8 ký tự space vào trường password",
+    "status": "passed",
+    "duration": "5781ms",
+    "expectedStatus": "passed",
+    "expected": "Đăng ký sinh viên thành công!",
+    "actual": "Đăng ký sinh viên thành công!",
+    "time": "03/08/2025 14:22:45"
+  },
+  {
+    "title": "TC_RGSTUDENT_16 - Kiểm tra việc đăng ký khi chọn ngày sinh tương lai",
+    "status": "failed",
+    "duration": "6037ms",
+    "expectedStatus": "passed",
+    "expected": "Ngày sinh không hợp lệ",
+    "actual": "Đăng ký sinh viên thành công!",
+    "time": "03/08/2025 14:22:46"
+  },
+  {
+    "title": "TC_RGSTUDENT_15 - Kiểm tra việc đăng ký khi nhập < 8 ký tự space vào trường password",
+    "status": "failed",
+    "duration": "6136ms",
+    "expectedStatus": "passed",
+    "expected": "Số điện thoại không hợp lệ",
+    "actual": "Đăng ký sinh viên thành công!",
+    "time": "03/08/2025 14:22:46"
+  },
+  {
+    "title": "TC_RGSTUDENT_17 - Kiểm tra khi nhập năm sinh > 4 ký tự ",
+    "status": "failed",
+    "duration": "3039ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "03/08/2025 14:22:48"
+  },
+  {
+    "title": "TC_RGSTUDENT_13 - Kiểm tra việc đăng ký sv với mật khẩu < 8 ký tự",
+    "status": "failed",
+    "duration": "5485ms",
+    "expectedStatus": "passed",
+    "expected": "Số điện thoại không hợp lệ",
+    "actual": "Đăng ký sinh viên thành công!",
+    "time": "03/08/2025 14:22:49"
+  },
+  {
+    "title": "TC_RGSTUDENT_18 - Kiểm tra khi nhập năm sinh bắt đầu với 0",
+    "status": "failed",
+    "duration": "1595ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "03/08/2025 14:22:51"
   }
 ]

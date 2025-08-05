@@ -4,18 +4,19 @@ import path from 'path';
 import dayjs from 'dayjs';
 
 // Khởi tạo biến test mới từ base.extend
+// giống kết thứa file test với Selenium
 export const test = base.extend({});
 
 // beforeEach, afterEach
 test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:3000/login'); 
-    console.log('Đã mở trang web trước khi chạy test');
   });
 
 test.afterEach(async ({}, testInfo) => {
-    const actual = testInfo.annotations.find(a => a.type === 'actual')?.description || 'N/A';
+    const actual = testInfo.annotations.find(a => a.type === 'actual')?.description || 'N/A';  // nếu hàm find không tìm thấy thì trả về undefined --> gắn giá trị N/A. Còn tìm thấy thì trả về description
     const expected = testInfo.annotations.find(a => a.type === 'expected')?.description || 'N/A';
 
+    // kết quả khi chạy 1 test case cần log ra --> dùng testInfo
     const result = {
         title: testInfo.title,
         status: testInfo.status,
@@ -26,8 +27,9 @@ test.afterEach(async ({}, testInfo) => {
         time: dayjs().format('DD/MM/YYYY HH:mm:ss')
     };
 
+    // log file để ghi lại result cho mỗi test
     const outputDir = path.join(__dirname, '../output');
-    const testFile = testInfo.file;
+    const testFile = testInfo.file; // là file có gọi đến testInfo hay sử dụng testInfo
     const fileName = path.basename(testFile);
     const baseName = fileName.replace(/(\.spec)?\.js$/, '');
     const logFile = path.join(outputDir, `${baseName}_result.json`);
@@ -43,7 +45,7 @@ test.afterEach(async ({}, testInfo) => {
         const content = fs.readFileSync(logFile, 'utf-8');
         existing = content ? JSON.parse(content) : [];
     } catch (e) {
-        console.warn(`⚠️ File log lỗi JSON: ${e.message}`);
+        console.warn(`File log lỗi JSON: ${e.message}`);
         // Rename file cũ để khỏi mất dữ liệu
         fs.renameSync(logFile, logFile + `.bak_${Date.now()}`);
         existing = [];
@@ -52,6 +54,5 @@ test.afterEach(async ({}, testInfo) => {
     existing.push(result);
     fs.writeFileSync(logFile, JSON.stringify(existing, null, 2)); //writeFileSync tự động tạo file mới nếu file chưa tồn tại.
 
-    console.log(`Đã ghi kết quả test: ${result.title}`);
 });
 

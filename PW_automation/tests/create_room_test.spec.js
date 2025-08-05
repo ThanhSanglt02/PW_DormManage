@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test';
+import {test} from '../tests/base_test.spec';
+import { expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { HomePage } from '../pages/HomePage';
 import { CreateRoom } from '../pages/CreateRoom';

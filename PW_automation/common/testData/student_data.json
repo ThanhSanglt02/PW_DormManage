@@ -1,7 +1,8 @@
 {
-    "idStudent": "66657677676",
+    "idStudent": "123479992001",
     "fullName": "thanh",
     "dateofBirth": "2004-12-24",
+    "dateofBirthInvalid": "2028-12-24",
     "address": "390 nguyen luong bang",
     "phone": "0569863224",
     "email": "quangvanthanhnef@gmail.com",
@@ -19,5 +20,16 @@
         { "value": "5", "label": "Năm 5" }
 
     ],
-    "passWord": "password"
+    "passWord": "password",
+
+    "messageIdInvalid": "Mã sinh viên không hợp lệ",
+    "messageIdDuplicate": "Mã sinh viên đã được sử dụng làm tên đăng nhập",
+    "messageRegisterSuccess": "Đăng ký sinh viên thành công!",
+    "messageEmailDuplicate": "Email đã tồn tại",
+    "messageEmailInvalid": "Email không hợp lệ",
+    "messageDateInvalid": "Ngày sinh không hợp lệ",
+    "messagePhoneInvalid": "Số điện thoại không hợp lệ",
+    "messagePasswordInvalid": "Mật khẩu không hợp lệ"
+
+
 }

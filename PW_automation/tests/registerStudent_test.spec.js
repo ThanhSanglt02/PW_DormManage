@@ -22,10 +22,11 @@ test.beforeEach(async ({ page }) => {
     // loginPage.goToLoginPage()
     loginPage.login(user_data.validUser.username, user_data.validUser.password)
     // await page.goto('http://localhost:3000/admin');
+    await homePage.goToRegisterStudentPage();
+
 });
 
-
-test.only('TC_RGSTUDENT_01 - Kiểm tra đăng ký sinh viên thành công với thông tin hợp lệ', async ({ page }, testInfo) => {
+test('TC_RGSTUDENT_01 - Kiểm tra đăng ký sinh viên thành công với thông tin hợp lệ', async ({ page }, testInfo) => {
     // Dữ liệu để test
     const id = student_data.idStudent;
     const fullName = student_data.fullName;
@@ -39,22 +40,23 @@ test.only('TC_RGSTUDENT_01 - Kiểm tra đăng ký sinh viên thành công với
     const namHoc = student_data.namHocOptions[0].value;  // Năm 1
     const sex = student_data.sexOptions[0].value; // "Nam"
 
-    await homePage.goToRegisterStudentPage();
+    // message expected
+    const expectResult = student_data.messageRegisterSuccess //Đăng ký sinh viên thành công!
+
     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
     await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Đăng ký sinh viên thành công!')
+    const result = await registerPage.aserrtGetMessage(expectResult)
 
     // Gán actual/expected vào testInfo
-    common.getTestInfo(testInfo, 'Đăng ký sinh viên thành công', result)
+    common.getTestInfo(testInfo, expectResult, result)
     // testInfo.annotations.push({ type: 'actual', description: result });
     // testInfo.annotations.push({ type: 'expected', description: 'Đăng ký sinh viên thành công' });
-    expect(result).toBe('Đăng ký sinh viên thành công!');
-
+    expect(result).toBe(expectResult);
     
 }); 
 
 
-test('TC_RGSTUDENT_02 - Kiểm tra đăng ký sinh viên khi nhập Mã sinh viên chỉ chứa chữ', async ({ page }) => {
+test('TC_RGSTUDENT_02 - Kiểm tra đăng ký sinh viên khi nhập Mã sinh viên chỉ chứa chữ', async ({ page }, testInfo) => {
      // Dữ liệu để test
      const id = 'abbvcbcd';
      const fullName = student_data.fullName;
@@ -67,16 +69,21 @@ test('TC_RGSTUDENT_02 - Kiểm tra đăng ký sinh viên khi nhập Mã sinh vi�
      // Lấy giá trị cụ thể từ mảng options
      const namHoc = student_data.namHocOptions[1].value;  // Năm 2
      const sex = student_data.sexOptions[1].value; // "Nữ"
- 
 
-     await homePage.goToRegisterStudentPage();
+     // message expected
+    const expectResult = student_data.messageIdInvalid // Mã sinh viên không hợp lệ
+ 
      await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
      await registerPage.clickButtonRegister();
-     const result = await registerPage.aserrtGetMessage('Mã sinh viên không hợp lệ')
-     expect(result).toBe('Mã sinh viên không hợp lệ');   
+     const result = await registerPage.aserrtGetMessage(expectResult)
+
+     // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+    
+     expect(result).toBe(expectResult);   
 }); 
 
-test('TC_RGSTUDENT_03 - Kiểm tra đăng ký sinh viên khi nhập Mã sinh viên chỉ chứa kí tự đặc biệt', async ({ page }) => {
+test('TC_RGSTUDENT_03 - Kiểm tra đăng ký sinh viên khi nhập Mã sinh viên chỉ chứa kí tự đặc biệt', async ({ page }, testInfo) => {
     // Dữ liệu để test
     const id = '@@@@@@@'; 
     const fullName = student_data.fullName;
@@ -90,16 +97,21 @@ test('TC_RGSTUDENT_03 - Kiểm tra đăng ký sinh viên khi nhập Mã sinh vi�
     const namHoc = student_data.namHocOptions[1].value;  // Năm 2
     const sex = student_data.sexOptions[1].value; // "Nữ"
 
+     // message expected
+     const expectResult = student_data.messageIdInvalid // Mã sinh viên không hợp lệ
+ 
+     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
+     await registerPage.clickButtonRegister();
+     const result = await registerPage.aserrtGetMessage(expectResult)
 
-    await homePage.goToRegisterStudentPage();
-    await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
-    await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Mã sinh viên không hợp lệ')
-    expect(result).toBe('Mã sinh viên không hợp lệ'); 
+     // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+    
+     expect(result).toBe(expectResult);  
 
 }); 
 
-test('TC_RGSTUDENT_04 - Kiểm tra khi đăng kí sinh viên với mã sinh viên đã tồn tại ', async ({ page }) => {
+test('TC_RGSTUDENT_04 - Kiểm tra khi đăng kí sinh viên với mã sinh viên đã tồn tại ', async ({ page }, testInfo) => {
     // Dữ liệu để test
     const id = student_data.idStudent;  // max da ton tai
     const fullName = student_data.fullName;
@@ -113,16 +125,20 @@ test('TC_RGSTUDENT_04 - Kiểm tra khi đăng kí sinh viên với mã sinh viê
     const namHoc = student_data.namHocOptions[1].value;  // Năm 2
     const sex = student_data.sexOptions[1].value; // "Nữ"
 
+     // message expected
+     const expectResult = student_data.messageIdDuplicate // Mã sinh viên đã tồn tại
 
-    await homePage.goToRegisterStudentPage();
     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
     await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Mã sinh viên đã tồn tại')
-    expect(result).toBe('Mã sinh viên đã tồn tại');   
+    const result = await registerPage.aserrtGetMessage(expectResult)
+
+     // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+    expect(result).toBe(expectResult);  
     
 }); 
 
-test('TC_RGSTUDENT_05 - Kiểm tra việc đăng ký sv với nhiều ký tự space vào trường Mã sinh viên', async ({ page }) => {
+test('TC_RGSTUDENT_05 - Kiểm tra việc đăng ký sv với nhiều ký tự space vào trường Mã sinh viên', async ({ page }, testInfo) => {
     // Dữ liệu để test
     const id = '             ';  
     const fullName = student_data.fullName;
@@ -136,16 +152,21 @@ test('TC_RGSTUDENT_05 - Kiểm tra việc đăng ký sv với nhiều ký tự s
     const namHoc = student_data.namHocOptions[1].value;  // Năm 2
     const sex = student_data.sexOptions[1].value; // "Nữ"
 
+    // message expected
+    const expectResult = student_data.messageIdInvalid // Mã sinh viên không hợp lệ
 
-    await homePage.goToRegisterStudentPage();
     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
     await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Mã sinh viên không hợp lệ')
-    expect(result).toBe('Mã sinh viên không hợp lệ');   
+    const result = await registerPage.aserrtGetMessage(expectResult)
+
+    // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+
+    expect(result).toBe(expectResult);   
     
 }); 
 
-test('TC_RGSTUDENT_06 - Kiểm tra việc đăng ký sv với Số điện thoại không bắt đầu với 0', async ({ page }) => {
+test('TC_RGSTUDENT_06 - Kiểm tra việc đăng ký sv với Số điện thoại không bắt đầu với 0', async ({ page }, testInfo) => {
     // Dữ liệu để test
     const id = '65432992';  
     const fullName = student_data.fullName;
@@ -159,16 +180,20 @@ test('TC_RGSTUDENT_06 - Kiểm tra việc đăng ký sv với Số điện tho�
     const namHoc = student_data.namHocOptions[1].value;  // Năm 2
     const sex = student_data.sexOptions[1].value; // "Nữ"
 
+    // message expected
+    const expectResult = student_data.messagePhoneInvalid // Số điện thoại không hợp lệ
 
-    await homePage.goToRegisterStudentPage();
     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
     await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Số điện thoại không hợp lệ')
-    expect(result).toBe('Số điện thoại không hợp lệ');   
+    const result = await registerPage.aserrtGetMessage(expectResult)
+    
+    // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+    expect(result).toBe(expectResult);   
     
 }); 
 
-test('TC_RGSTUDENT_07 - Kiểm tra việc đăng ký sv với Số điện thoại < 10 ký tự', async ({ page }) => {
+test('TC_RGSTUDENT_07 - Kiểm tra việc đăng ký sv với Số điện thoại < 10 ký tự', async ({ page }, testInfo) => {
     // Dữ liệu để test
     const id = '0235631';  
     const fullName = student_data.fullName;
@@ -182,16 +207,20 @@ test('TC_RGSTUDENT_07 - Kiểm tra việc đăng ký sv với Số điện tho�
     const namHoc = student_data.namHocOptions[1].value;  // Năm 2
     const sex = student_data.sexOptions[1].value; // "Nữ"
 
+    // message expected
+    const expectResult = student_data.messagePhoneInvalid // Số điện thoại không hợp lệ
 
-    await homePage.goToRegisterStudentPage();
     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
     await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Số điện thoại không hợp lệ')
-    expect(result).toBe('Số điện thoại không hợp lệ');
+    const result = await registerPage.aserrtGetMessage(expectResult)
+
+    // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+    expect(result).toBe(expectResult);   
     
 }); 
 
-test('TC_RGSTUDENT_08 - Kiểm tra việc đăng ký sv với Số điện thoại > 10 ký tự', async ({ page }) => {
+test('TC_RGSTUDENT_08 - Kiểm tra việc đăng ký sv với Số điện thoại > 10 ký tự', async ({ page }, testInfo) => {
     // Dữ liệu để test
     const id = '1131321312';  
     const fullName = student_data.fullName;
@@ -205,16 +234,21 @@ test('TC_RGSTUDENT_08 - Kiểm tra việc đăng ký sv với Số điện tho�
     const namHoc = student_data.namHocOptions[1].value;  // Năm 2
     const sex = student_data.sexOptions[1].value; // "Nữ"
 
+    // message expected
+    const expectResult = student_data.messagePhoneInvalid // Số điện thoại không hợp lệ
 
-    await homePage.goToRegisterStudentPage();
     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
     await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Số điện thoại không hợp lệ')
-    expect(result).toBe('Số điện thoại không hợp lệ');
+    const result = await registerPage.aserrtGetMessage(expectResult)
+
+    // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+
+    expect(result).toBe(expectResult);   
     
 }); 
 
-test('TC_RGSTUDENT_09 - Kiểm tra chức năng đăng ký khi nhập ký tự đặc biệt vào trường phone', async ({ page }) => {
+test('TC_RGSTUDENT_09 - Kiểm tra chức năng đăng ký khi nhập ký tự đặc biệt vào trường phone', async ({ page }, testInfo) => {
     // Dữ liệu để test
     const id = '9222';  
     const fullName = student_data.fullName;
@@ -228,16 +262,21 @@ test('TC_RGSTUDENT_09 - Kiểm tra chức năng đăng ký khi nhập ký tự �
     const namHoc = student_data.namHocOptions[1].value;  // Năm 2
     const sex = student_data.sexOptions[1].value; // "Nữ"
 
+    // message expected
+    const expectResult = student_data.messagePhoneInvalid // Số điện thoại không hợp lệ
 
-    await homePage.goToRegisterStudentPage();
     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
     await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Số điện thoại không hợp lệ')
-    expect(result).toBe('Số điện thoại không hợp lệ');
+    const result = await registerPage.aserrtGetMessage(expectResult)
+    
+     // Gán actual/expected vào testInfo
+     common.getTestInfo(testInfo, expectResult, result)
+
+    expect(result).toBe(expectResult);   
     
 }); 
 
-test('TC_RGSTUDENT_10 - Kiểm tra việc đăng ký với email đã tồn tại', async ({ page }) => {
+test('TC_RGSTUDENT_10 - Kiểm tra việc đăng ký với email đã tồn tại', async ({ page }, testInfo) => {
     // Dữ liệu để test
     const id = '3431123';  
     const fullName = student_data.fullName;
@@ -251,16 +290,22 @@ test('TC_RGSTUDENT_10 - Kiểm tra việc đăng ký với email đã tồn tạ
     const namHoc = student_data.namHocOptions[1].value;  // Năm 2
     const sex = student_data.sexOptions[1].value; // "Nữ"
 
+    // message expected
+    const expectResult = student_data.messageEmailDuplicate // Email đã tồn tại
 
-    await homePage.goToRegisterStudentPage();
+
     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
     await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Email đã tồn tại')
-    expect(result).toBe('Email đã tồn tại');
+    const result = await registerPage.aserrtGetMessage(expectResult)
+    
+     // Gán actual/expected vào testInfo
+     common.getTestInfo(testInfo, expectResult, result)
+
+    expect(result).toBe(expectResult);
     
 }); 
 
-test('TC_RGSTUDENT_11 - Kiểm tra thông báo lỗi khi nhập email sai định dạng', async ({ page }) => {
+test('TC_RGSTUDENT_11 - Kiểm tra thông báo lỗi khi nhập email sai định dạng', async ({ page }, testInfo) => {
     // Dữ liệu để test
     const id = '438993183832';  
     const fullName = student_data.fullName;
@@ -274,16 +319,22 @@ test('TC_RGSTUDENT_11 - Kiểm tra thông báo lỗi khi nhập email sai địn
     const namHoc = student_data.namHocOptions[1].value;  // Năm 2
     const sex = student_data.sexOptions[1].value; // "Nữ"
 
+    // message expected
+    const expectResult = student_data.messageEmailInvalid // Email không hợp lệ
 
-    await homePage.goToRegisterStudentPage();
+
     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
     await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Email không hợp lệ')
-    expect(result).toBe('Email không hợp lệ');
+    const result = await registerPage.aserrtGetMessage(expectResult)
+    
+     // Gán actual/expected vào testInfo
+     common.getTestInfo(testInfo, expectResult, result)
+
+    expect(result).toBe(expectResult);
     
 }); 
 
-test('TC_RGSTUDENT_12 - Kiểm tra thông báo lỗi khi nhập email sai định dạng', async ({ page }) => {
+test('TC_RGSTUDENT_12 - Kiểm tra thông báo lỗi khi nhập email sai định dạng', async ({ page }, testInfo) => {
     /// Dữ liệu để test
     const id = '100054305';  
     const fullName = student_data.fullName;
@@ -297,108 +348,192 @@ test('TC_RGSTUDENT_12 - Kiểm tra thông báo lỗi khi nhập email sai địn
     const namHoc = student_data.namHocOptions[1].value;  // Năm 2
     const sex = student_data.sexOptions[1].value; // "Nữ"
 
+    // message expected
+    const expectResult = student_data.messageEmailInvalid // Email không hợp lệ
 
-    await homePage.goToRegisterStudentPage();
+
     await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
     await registerPage.clickButtonRegister();
-    const result = await registerPage.aserrtGetMessage('Email không hợp lệ')
-    expect(result).toBe('Email không hợp lệ');
+    const result = await registerPage.aserrtGetMessage(expectResult)
+
+    // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+
+    expect(result).toBe(expectResult);
     
 }); 
 
 
-// test('TC_RGSTUDENT_13 - Kiểm tra việc đăng ký sv với mật khẩu < 8 ký tự', async ({ page }) => {
-//     // Dữ liệu để test
-//     const roomNumber = room_data.roomNumber;
-//     const capacity = room_data.capacity;
-//     const price = room_data.price;
-//     // Lấy giá trị cụ thể từ mảng options
-//     const building = room_data.buildingOptions[0].value; // "R1"
-//     const type = room_data.typeOptions[0].value; // "standard"
-//     const status = room_data.statusOptions[0].value; // "Còn trống"
-
-
+test('TC_RGSTUDENT_13 - Kiểm tra việc đăng ký sv với mật khẩu < 8 ký tự', async ({ page }, testInfo) => {
+    /// Dữ liệu để test
+    const id = '890904';  
+    const fullName = student_data.fullName;
+    const dateofBirth = student_data.dateofBirth;
+    const phone = student_data.phone;
+    const email = 'tuhh@gmail.com';
+    const address = student_data.address;
+    const passWord = '1234567';
     
+    // Lấy giá trị cụ thể từ mảng options
+    const namHoc = student_data.namHocOptions[1].value;  // Năm 2
+    const sex = student_data.sexOptions[1].value; // "Nữ"
+
+    // message expected
+    const expectResult = student_data.messagePasswordInvalid // Mật khẩu không hợp lệ
+
+    await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
+    await registerPage.clickButtonRegister();
+    const result = await registerPage.aserrtGetMessage(expectResult)
     
-// }); 
+    // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
 
-
-// test('TC_RGSTUDENT_14 - Kiểm tra việc đăng ký khi nhập 8 ký tự space vào trường password', async ({ page }) => {
-//     // Dữ liệu để test
-//     const roomNumber = room_data.roomNumber;
-//     const capacity = room_data.capacity;
-//     const price = room_data.price;
-//     // Lấy giá trị cụ thể từ mảng options
-//     const building = room_data.buildingOptions[0].value; // "R1"
-//     const type = room_data.typeOptions[0].value; // "standard"
-//     const status = room_data.statusOptions[0].value; // "Còn trống"
-
-
+    expect(result).toBe(expectResult);
     
+}); 
+
+
+test('TC_RGSTUDENT_14 - Kiểm tra việc đăng ký khi nhập 8 ký tự space vào trường password', async ({ page }, testInfo) => {
+    /// Dữ liệu để test
+    const id = '670011112';  
+    const fullName = student_data.fullName;
+    const dateofBirth = student_data.dateofBirth;
+    const phone = student_data.phone;
+    const email = 'abhjk@gmail.com';
+    const address = student_data.address;
+    const passWord = '        ';  // 8 ký tự space
     
-// }); 
+    // Lấy giá trị cụ thể từ mảng options
+    const namHoc = student_data.namHocOptions[1].value;  // Năm 2
+    const sex = student_data.sexOptions[1].value; // "Nữ"
 
+    // message expected
+    const expectResult = student_data.messageRegisterSuccess //Đăng ký sinh viên thành công!
 
-// test('TC_RGSTUDENT_15 - Kiểm tra việc đăng ký khi nhập < 8 ký tự space vào trường password', async ({ page }) => {
-//     // Dữ liệu để test
-//     const roomNumber = room_data.roomNumber;
-//     const capacity = room_data.capacity;
-//     const price = room_data.price;
-//     // Lấy giá trị cụ thể từ mảng options
-//     const building = room_data.buildingOptions[0].value; // "R1"
-//     const type = room_data.typeOptions[0].value; // "standard"
-//     const status = room_data.statusOptions[0].value; // "Còn trống"
+    await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
+    await registerPage.clickButtonRegister();
+    const result = await registerPage.aserrtGetMessage(expectResult)
 
-
+    // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
     
+    expect(result).toBe(expectResult);
+        
+}); 
+
+
+test('TC_RGSTUDENT_15 - Kiểm tra việc đăng ký khi nhập < 8 ký tự space vào trường password', async ({ page }, testInfo) => {
+    /// Dữ liệu để test
+    const id = '87999966333';  
+    const fullName = student_data.fullName;
+    const dateofBirth = student_data.dateofBirth;
+    const phone = student_data.phone;
+    const email = 'thanh231@gmail.com';
+    const address = student_data.address;
+    const passWord = '       '; // 7 ký tự space
     
-// }); 
+    // Lấy giá trị cụ thể từ mảng options
+    const namHoc = student_data.namHocOptions[1].value;  // Năm 2
+    const sex = student_data.sexOptions[1].value; // "Nữ"
 
+    // message expected
+    const expectResult = student_data.messagePasswordInvalid // Mật khẩu không hợp lệ
 
-// test('TC_RGSTUDENT_16 - Kiểm tra việc đăng ký khi chọn ngày sinh tương lai', async ({ page }) => {
-//     // Dữ liệu để test
-//     const roomNumber = room_data.roomNumber;
-//     const capacity = room_data.capacity;
-//     const price = room_data.price;
-//     // Lấy giá trị cụ thể từ mảng options
-//     const building = room_data.buildingOptions[0].value; // "R1"
-//     const type = room_data.typeOptions[0].value; // "standard"
-//     const status = room_data.statusOptions[0].value; // "Còn trống"
-
-
+    await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
+    await registerPage.clickButtonRegister();
+    const result = await registerPage.aserrtGetMessage(expectResult)
     
+    // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+
+    expect(result).toBe(expectResult);
     
-// }); 
+}); 
 
 
-// test('TC_RGSTUDENT_17 - Kiểm tra khi nhập năm sinh > 4 ký tự ', async ({ page }) => {
-//     // Dữ liệu để test
-//     const roomNumber = room_data.roomNumber;
-//     const capacity = room_data.capacity;
-//     const price = room_data.price;
-//     // Lấy giá trị cụ thể từ mảng options
-//     const building = room_data.buildingOptions[0].value; // "R1"
-//     const type = room_data.typeOptions[0].value; // "standard"
-//     const status = room_data.statusOptions[0].value; // "Còn trống"
-
-
+test('TC_RGSTUDENT_16 - Kiểm tra việc đăng ký khi chọn ngày sinh tương lai', async ({ page }, testInfo) => {
+    /// Dữ liệu để test
+    const id = '123213089098';  
+    const fullName = student_data.fullName;
+    const dateofBirth = student_data.dateofBirthInvalid; // 2028
+    const phone = student_data.phone;
+    const email = 'thanhnnnn@gmail.com';
+    const address = student_data.address;
+    const passWord = student_data.passWord;
     
+    // Lấy giá trị cụ thể từ mảng options
+    const namHoc = student_data.namHocOptions[1].value;  // Năm 2
+    const sex = student_data.sexOptions[1].value; // "Nữ"
+
+    // message expected
+    const expectResult = student_data.messageDateInvalid // Ngày sinh không hợp lệ
+
+    await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
+    await registerPage.clickButtonRegister();
+    const result = await registerPage.aserrtGetMessage(expectResult)
     
-// }); 
+     // Gán actual/expected vào testInfo
+     common.getTestInfo(testInfo, expectResult, result)
 
-
-// test('TC_RGSTUDENT_18 - Kiểm tra khi nhập năm sinh bắt đầu với 0', async ({ page }) => {
-//     // Dữ liệu để test
-//     const roomNumber = room_data.roomNumber;
-//     const capacity = room_data.capacity;
-//     const price = room_data.price;
-//     // Lấy giá trị cụ thể từ mảng options
-//     const building = room_data.buildingOptions[0].value; // "R1"
-//     const type = room_data.typeOptions[0].value; // "standard"
-//     const status = room_data.statusOptions[0].value; // "Còn trống"
-
-
+    expect(result).toBe(expectResult);
     
+}); 
+
+
+test('TC_RGSTUDENT_17 - Kiểm tra khi nhập năm sinh > 4 ký tự ', async ({ page }, testInfo) => {
+    /// Dữ liệu để test
+    const id = '7777788888';  
+    const fullName = student_data.fullName;
+    const dateofBirth = '12-29-20277';
+    const phone = student_data.phone;
+    const email = 'sang555@gmail.com';
+    const address = student_data.address;
+    const passWord = student_data.passWord
     
-// }); 
+    // Lấy giá trị cụ thể từ mảng options
+    const namHoc = student_data.namHocOptions[1].value;  // Năm 2
+    const sex = student_data.sexOptions[1].value; // "Nữ"
+
+    // message expected
+    const expectResult = student_data.messageDateInvalid // Ngày sinh không hợp lệ
+
+    await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
+    await registerPage.clickButtonRegister();
+    const result = await registerPage.aserrtGetMessage(expectResult)
+    
+    // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+ 
+    expect(result).toBe(expectResult);
+    
+}); 
+
+
+test('TC_RGSTUDENT_18 - Kiểm tra khi nhập năm sinh bắt đầu với 0', async ({ page }, testInfo) => {
+    /// Dữ liệu để test
+    const id = '1311308083432';  
+    const fullName = student_data.fullName;
+    const dateofBirth = '12-29-0012';
+    const phone = student_data.phone;
+    const email = 'hahahahah@gmail.com';
+    const address = student_data.address;
+    const passWord = student_data.passWord
+    
+    // Lấy giá trị cụ thể từ mảng options
+    const namHoc = student_data.namHocOptions[1].value;  // Năm 2
+    const sex = student_data.sexOptions[1].value; // "Nữ"
+
+    // message expected
+    const expectResult = student_data.messageDateInvalid // Ngày sinh không hợp lệ
+
+    await registerPage.fillToRegisterStudent(id, fullName, dateofBirth, sex, address, phone, email, namHoc, passWord);
+    await registerPage.clickButtonRegister();
+    const result = await registerPage.aserrtGetMessage(expectResult)
+
+    // Gán actual/expected vào testInfo
+    common.getTestInfo(testInfo, expectResult, result)
+
+    expect(result).toBe(expectResult);
+    
+}); 
 

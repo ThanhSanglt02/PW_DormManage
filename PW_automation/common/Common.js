@@ -26,7 +26,7 @@ const common = {
         }
     },
 
-    async getTestInfo(testInfo, expect, actual) {
+    getTestInfo(testInfo, expect, actual) {
         testInfo.annotations.push({ type: 'actual', description: actual });
         testInfo.annotations.push({ type: 'expected', description: expect });
     }
