@@ -14,7 +14,7 @@ exports.CreateRoom = class CreateRoom extends HomePage {
     async aserrtGetMessage(expected) {
         try {
             const locator = this.page.locator(createRoomLocators.message);
-            await locator.waitFor({ timeout: 3000 }); // chờ xuất hiện
+            await locator.waitFor({ timeout: 5000 }); // chờ xuất hiện
     
             const actual = await locator.textContent();
             const actualTrimmed = actual?.trim();
@@ -48,6 +48,13 @@ exports.CreateRoom = class CreateRoom extends HomePage {
         
     };
 
+    async getInputValue(input) {
+        const locatorKey = `input${input.charAt(0).toUpperCase()}${input.slice(1)}`;
+        const locator = createRoomLocators[locatorKey];
+        const element = this.page.locator(locator);
+        const actualValue = await element.inputValue();
+        return actualValue;
+    }
     // async getMsgRequired() {
     //     // // Kiểm tra field nào bị invalid → return validationMessage thực
     //     // const allFields = [
@@ -79,14 +86,14 @@ exports.CreateRoom = class CreateRoom extends HomePage {
     async fillToCreateRoom(roomNumber, capacity, price, building, type, status) {
         
         if (roomNumber) {
-            await this.page.fill(createRoomLocators.inputRoomNumber, roomNumber);
+            await this.page.type(createRoomLocators.inputRoomNumber, roomNumber);
         }
         if (building) {
             await this.page.click(createRoomLocators.inputRoomBuilding);
             await this.selectValueBuilding(building);
         }
         if (capacity) {
-            await this.page.fill(createRoomLocators.inputRoomCapacity, capacity);
+            await this.page.type(createRoomLocators.inputRoomCapacity, capacity);
         }
         if (type) {
             await this.page.click(createRoomLocators.inputRoomType);    

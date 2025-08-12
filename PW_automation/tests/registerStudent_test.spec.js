@@ -484,7 +484,7 @@ test('TC_RGSTUDENT_17 - Kiểm tra khi nhập năm sinh > 4 ký tự ', async ({
     /// Dữ liệu để test
     const id = '7777788888';  
     const fullName = student_data.fullName;
-    const dateofBirth = '12-29-20277';
+    const dateofBirth = '20277-12-29';
     const phone = student_data.phone;
     const email = 'sang555@gmail.com';
     const address = student_data.address;
@@ -513,7 +513,7 @@ test('TC_RGSTUDENT_18 - Kiểm tra khi nhập năm sinh bắt đầu với 0', a
     /// Dữ liệu để test
     const id = '1311308083432';  
     const fullName = student_data.fullName;
-    const dateofBirth = '12-29-0012';
+    const dateofBirth = '0012-12-29';
     const phone = student_data.phone;
     const email = 'hahahahah@gmail.com';
     const address = student_data.address;

@@ -1,0 +1,56 @@
+[
+  {
+    "title": "TC_CRTROOM_11 - Kiểm tra việc tạo phòng khi không đăng nhập",
+    "status": "passed",
+    "duration": "942ms",
+    "expectedStatus": "passed",
+    "expected": "http://localhost:3000/login",
+    "actual": "http://localhost:3000/admin/room-registration",
+    "time": "05/08/2025 13:28:00"
+  },
+  {
+    "title": "TC_CRTROOM_12 - Kiểm tra việc tạo phòng khi login với role Student",
+    "status": "passed",
+    "duration": "1232ms",
+    "expectedStatus": "passed",
+    "expected": "http://localhost:3000/login",
+    "actual": "http://localhost:3000/admin/room-registration",
+    "time": "05/08/2025 13:28:01"
+  },
+  {
+    "title": "TC_CRTROOM_11 - Kiểm tra việc tạo phòng khi không đăng nhập",
+    "status": "passed",
+    "duration": "853ms",
+    "expectedStatus": "passed",
+    "expected": "http://localhost:3000/login",
+    "actual": "http://localhost:3000/admin/room-registration",
+    "time": "05/08/2025 13:29:36"
+  },
+  {
+    "title": "TC_CRTROOM_12 - Kiểm tra việc tạo phòng khi login với role Student",
+    "status": "passed",
+    "duration": "990ms",
+    "expectedStatus": "passed",
+    "expected": "http://localhost:3000/login",
+    "actual": "http://localhost:3000/admin/room-registration",
+    "time": "05/08/2025 13:29:37"
+  },
+  {
+    "title": "TC_CRTROOM_11 - Kiểm tra việc tạo phòng khi không đăng nhập",
+    "status": "passed",
+    "duration": "947ms",
+    "expectedStatus": "passed",
+    "expected": "http://localhost:3000/login",
+    "actual": "http://localhost:3000/admin/room-registration",
+    "time": "05/08/2025 13:31:52"
+  },
+  {
+    "title": "TC_CRTROOM_11 - Kiểm tra việc tạo phòng khi không đăng nhập",
+    "status": "failed",
+    "duration": "658344ms",
+    "expectedStatus": "passed",
+    "expected": "http://localhost:3000/login",
+    "actual": "http://localhost:3000/admin/room-registration",
+    "time": "05/08/2025 13:43:01"
+  }
+]

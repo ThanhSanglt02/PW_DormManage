@@ -8,6 +8,7 @@ import { ListRoom } from '../pages/ListRoom';
 
 const user_data = require('../common/testData/user_data.json')
 const room_data = require('../common/testData/room_data.json');
+const common = require('../common/Common');
 
 let loginPage;
 let homePage;
@@ -22,7 +23,6 @@ test.beforeEach(async ({ page }) => {
 
 
     // Login
-    loginPage.goToLoginPage()
     loginPage.login(user_data.validUser.username, user_data.validUser.password)
     // await page.goto('http://localhost:3000/admin');
 });
@@ -31,37 +31,13 @@ test.beforeEach(async ({ page }) => {
 test('TC_CRTROOM_01 - Kiểm tra điều hướng đến trang tạo phòng', async ({ page }) => {
     await homePage.goToCreateRoomPage();  
     await createRoomPage.clickCardRoomManage();
-    await expect(page).toHaveURL('http://localhost:3000/admin/room/add');
+    await expect(page).toHaveURL('http://localhost:3000/admin/room-registration');
 }); 
 
 
-test('TC_CRTROOM_02 - Kiểm tra việc tạo phòng mới thành công với thông tin hợp lệ', async ({ page }) => {
-    // Dữ liệu để test
-    const roomNumber = room_data.roomNumber;
-    const capacity = room_data.capacity;
-    const price = room_data.price;
-    // Lấy giá trị cụ thể từ mảng options
-    const building = room_data.buildingOptions[0].value; // "R1"
-    const type = room_data.typeOptions[0].value; // "standard"
-    const status = room_data.statusOptions[0].value; // "Còn trống"
-
-
-    
-    await homePage.goToCreateRoomPage();  
-    await createRoomPage.clickCardRoomManage();
-    await createRoomPage.fillToCreateRoom(roomNumber, capacity, price, building, type, status);
-    await createRoomPage.clickButtonCreateRoom();
-    const result = await createRoomPage.aserrtGetMessage('Đăng ký phòng thành công')
-    expect(result).toBe('Đăng ký phòng thành công');
-}); 
-
-// test.describe.serial() + chia nhỏ bước thành test: Khi dùng serial, tất cả test sẽ dùng chung 1 page trong cùng browser context, và không reset lại giữa các test.
-
-
-// TC_0
-test('TC_CRTROOM_03 - Kiểm tra việc nhập ký tự bắt đầu cho trường Số phòng là chữ', async ({ page }) => {
+test('TC_CRTROOM_02 - Kiểm tra việc tạo phòng mới thành công với thông tin hợp lệ', async ({ page }, testInfo) => {
   // Dữ liệu để test
-  const roomNumber = "P312";
+  const roomNumber = room_data.roomNumber;
   const capacity = room_data.capacity;
   const price = room_data.price;
   // Lấy giá trị cụ thể từ mảng options
@@ -69,18 +45,51 @@ test('TC_CRTROOM_03 - Kiểm tra việc nhập ký tự bắt đầu cho trườ
   const type = room_data.typeOptions[0].value; // "standard"
   const status = room_data.statusOptions[0].value; // "Còn trống"
 
-  
+  // message expected
+  const expectResult = room_data.messageCreateRoomSuccess // Đăng ký phòng thành công
+
   await homePage.goToCreateRoomPage();  
-    await createRoomPage.clickCardRoomManage();
-    await createRoomPage.fillToCreateRoom(roomNumber, capacity, price, building, type, status);
-    await createRoomPage.clickButtonCreateRoom();
-  // Rule: Số phòng chỉ chứa số và tối đa 3 ký tự
-  const result = await createRoomPage.aserrtGetMessage('Số phòng không hợp lệ')
-  expect(result).toBe('Số phòng không hợp lệ');
+  await createRoomPage.clickCardRoomManage();
+  await createRoomPage.fillToCreateRoom(roomNumber, capacity, price, building, type, status);
+  await createRoomPage.clickButtonCreateRoom();
+
+  const result = await createRoomPage.aserrtGetMessage(expectResult)
+  // Gán actual/expected vào testInfo
+  common.getTestInfo(testInfo, expectResult, result)
+
+  expect(result).toBe(expectResult);
 }); 
 
+// test.describe.serial() + chia nhỏ bước thành test: Khi dùng serial, tất cả test sẽ dùng chung 1 page trong cùng browser context, và không reset lại giữa các test.
 
-test('TC_CRTROOM_04 - Kiểm tra việc tạo phòng với số phòng đã tồn tại', async({page}) => {
+test('TC_CRTROOM_03 - Kiểm tra hệ thống chặn ký tự chữ khi nhập liệu cho trường số phòng', async ({ page }, testInfo) => {
+  // Dữ liệu để test
+  const roomNumberText = 'P101';
+  const capacity = room_data.capacity;
+  const price = room_data.price;
+  // Lấy giá trị cụ thể từ mảng options
+  const building = room_data.buildingOptions[0].value; // "R1"
+  const type = room_data.typeOptions[0].value; // "standard"
+  const status = room_data.statusOptions[0].value; // "Còn trống"
+
+  // message expected
+  const expectResult = '101'
+
+  await homePage.goToCreateRoomPage();  
+  await createRoomPage.clickCardRoomManage();
+  await createRoomPage.fillToCreateRoom(roomNumberText, capacity, price, building, type, status);
+  await createRoomPage.clickButtonCreateRoom();
+
+  console.log("[Test case 3] Gia tri input truyen vao: " + roomNumberText)
+  const result = await createRoomPage.getInputValue('roomNumber')
+  console.log("[Test case 3] Gia tri thuc te hien thi: " + result)
+  // Gán actual/expected vào testInfo
+  common.getTestInfo(testInfo, expectResult, result)
+
+  expect(result).toBe(expectResult);
+}); 
+
+test('TC_CRTROOM_04 - Kiểm tra việc tạo phòng với số phòng đã tồn tại', async({page}, testInfo) => {
   // Dữ liệu để test
   const roomNumber = room_data.roomNumber;  // số phòng đã tồn tại
   const capacity = room_data.capacity;
@@ -90,17 +99,24 @@ test('TC_CRTROOM_04 - Kiểm tra việc tạo phòng với số phòng đã tồ
   const type = room_data.typeOptions[0].value; // "standard"
   const status = room_data.statusOptions[0].value; // "Còn trống"
 
+  // message expected
+  const expectResult = room_data.messageIdDuplicate // Số phòng đã tồn tại
+  
   await homePage.goToCreateRoomPage();  
   await createRoomPage.clickCardRoomManage();
   await createRoomPage.fillToCreateRoom(roomNumber, capacity, price, building, type, status);
   await createRoomPage.clickButtonCreateRoom();
-  const result = await createRoomPage.aserrtGetMessage('Số phòng đã tồn tại')
-  expect(result).toBe('Số phòng đã tồn tại');
-})
+  // Rule: Số phòng chỉ chứa số và tối đa 3 ký tự
+  const result = await createRoomPage.aserrtGetMessage(expectResult)
+  // Gán actual/expected vào testInfo
+  common.getTestInfo(testInfo, expectResult, result)
 
-test('TC_CRTROOM_05 - Kiểm tra chức năng tạo phòng khi nhập ký tự đặc biệt cho trường số phòng', async({page}) => {
+  expect(result).toBe(expectResult);
+});
+
+test('TC_CRTROOM_05 - Kiểm tra hệ thống chặn ký tự đặc biệt khi nhập liệu cho trường số phòng', async ({ page }, testInfo) => {
   // Dữ liệu để test
-  const roomNumber = '@1234@';  
+  const roomNumberText = '@@@@';
   const capacity = room_data.capacity;
   const price = room_data.price;
   // Lấy giá trị cụ thể từ mảng options
@@ -108,16 +124,25 @@ test('TC_CRTROOM_05 - Kiểm tra chức năng tạo phòng khi nhập ký tự �
   const type = room_data.typeOptions[0].value; // "standard"
   const status = room_data.statusOptions[0].value; // "Còn trống"
 
+  // message expected
+  const expectResult = ''
 
   await homePage.goToCreateRoomPage();  
   await createRoomPage.clickCardRoomManage();
-  await createRoomPage.fillToCreateRoom(roomNumber, capacity, price, building, type, status);
+  await createRoomPage.fillToCreateRoom(roomNumberText, capacity, price, building, type, status);
   await createRoomPage.clickButtonCreateRoom();
-  const result = await createRoomPage.aserrtGetMessage('Số phòng không hợp lệ')
-  expect(result).toBe('Số phòng không hợp lệ');
-})
 
-test('TC_CRTROOM_06 - Kiểm tra giới hạn ô nhập dữ liệu cho trường số phòng', async() => {
+  console.log("[Test case 5] Gia tri input truyen vao: " + roomNumberText)
+  const result = await createRoomPage.getInputValue('roomNumber')
+  console.log("[Test case 5] Gia tri thuc te hien thi: " + result)
+  // Gán actual/expected vào testInfo
+  common.getTestInfo(testInfo, expectResult, result)
+
+  expect(result).toBe(expectResult);
+}); 
+
+
+test('TC_CRTROOM_06 - Kiểm tra giới hạn ô nhập dữ liệu cho trường số phòng', async({page}, testInfo) => {
   // Dữ liệu để test
   const roomNumberValue = room_data.roomNumberLimit; 
   const capacity = room_data.capacity;
@@ -132,12 +157,15 @@ test('TC_CRTROOM_06 - Kiểm tra giới hạn ô nhập dữ liệu cho trườn
   await createRoomPage.fillToCreateRoom(roomNumberValue, capacity, price, building, type, status);
   await createRoomPage.clickButtonCreateRoom();
   const actualLenght = await createRoomPage.getLimitCharacter('roomNumber');
-  console.log(`Độ dài ký tự thực tế của input là: ${actualLenght}`)
+  console.log(`[Test case 6] Độ dài ký tự thực tế của input là: ${actualLenght}`)
+  
+  common.getTestInfo(testInfo, 3, actualLenght)
+  // Rule: Số phòng chỉ chứa số và tối đa 3 ký tự
   await expect(actualLenght).toBeLessThanOrEqual(3); // đảm bảo chỉ còn lại 3 ký tự
 
 })
 
-test('TC_CRTROOM_07 - KKiểm tra việc giá trị âm cho trường Sức chứa', async() => {
+test('TC_CRTROOM_07 - Kiểm tra việc giá trị âm cho trường Sức chứa', async({page}, testInfo) => {
   // Dữ liệu để test
   const roomNumber = '199'; 
   const capacity = "-8";
@@ -147,15 +175,22 @@ test('TC_CRTROOM_07 - KKiểm tra việc giá trị âm cho trường Sức ch�
   const type = room_data.typeOptions[0].value; // "standard"
   const status = room_data.statusOptions[0].value; // "Còn trống"
 
+  // message expected
+  const expectResult = room_data.messageCapacityInvalid // Sức chứa không hợp lệ
+  
   await homePage.goToCreateRoomPage();  
   await createRoomPage.clickCardRoomManage();
   await createRoomPage.fillToCreateRoom(roomNumber, capacity, price, building, type, status);
   await createRoomPage.clickButtonCreateRoom();
-  const result = await createRoomPage.aserrtGetMessage('Sức chứa không hợp lệ')
-  expect(result).toBe('Sức chứa không hợp lệ');
+  // Rule: Số phòng chỉ chứa số và tối đa 3 ký tự
+  const result = await createRoomPage.aserrtGetMessage(expectResult)
+  // Gán actual/expected vào testInfo
+  common.getTestInfo(testInfo, expectResult, result)
+
+  expect(result).toBe(expectResult);
 })
 
-test('TC_CRTROOM_08 - Kiểm tra việc nhập giá trị vượt ngưỡng tối đa là 10 cho trường Sức chứa', async() => {
+test('TC_CRTROOM_08 - Kiểm tra việc nhập giá trị vượt ngưỡng tối đa là 10 cho trường Sức chứa', async({page}, testInfo) => {
   // Dữ liệu để test
   const roomNumber = '449'; 
   const capacity = "12";
@@ -165,15 +200,22 @@ test('TC_CRTROOM_08 - Kiểm tra việc nhập giá trị vượt ngưỡng tố
   const type = room_data.typeOptions[1].value; 
   const status = room_data.statusOptions[0].value; // "Còn trống"
 
+  // message expected
+  const expectResult = room_data.messageCapacityInvalid // Sức chứa không hợp lệ
+  
   await homePage.goToCreateRoomPage();  
   await createRoomPage.clickCardRoomManage();
   await createRoomPage.fillToCreateRoom(roomNumber, capacity, price, building, type, status);
   await createRoomPage.clickButtonCreateRoom();
-  const result = await createRoomPage.aserrtGetMessage('Sức chứa không hợp lệ')
-  expect(result).toBe('Sức chứa không hợp lệ');
+  // Rule: Số phòng chỉ chứa số và tối đa 3 ký tự
+  const result = await createRoomPage.aserrtGetMessage(expectResult)
+  // Gán actual/expected vào testInfo
+  common.getTestInfo(testInfo, expectResult, result)
+
+  expect(result).toBe(expectResult);
 })
 
-test('TC_CRTROOM_09 - Kiểm tra việc nhập giá trị âm cho trường Giá phòng', async() => {
+test('TC_CRTROOM_09 - Kiểm tra việc nhập giá trị âm cho trường Giá phòng', async({page}, testInfo) => {
   // Dữ liệu để test
   const roomNumber = '227'; 
   const capacity = room_data.capacity;
@@ -183,15 +225,22 @@ test('TC_CRTROOM_09 - Kiểm tra việc nhập giá trị âm cho trường Giá
   const type = room_data.typeOptions[0].value; // "standard"
   const status = room_data.statusOptions[0].value; // "Còn trống"
 
+  // message expected
+  const expectResult = room_data.messagePriceInvalid // Giá phòng không hợp lệ
+  
   await homePage.goToCreateRoomPage();  
   await createRoomPage.clickCardRoomManage();
   await createRoomPage.fillToCreateRoom(roomNumber, capacity, price, building, type, status);
   await createRoomPage.clickButtonCreateRoom();
-  const result = await createRoomPage.aserrtGetMessage('Giá phòng không hợp lệ')
-  expect(result).toBe('Giá phòng không hợp lệ');
+  // Rule: Số phòng chỉ chứa số và tối đa 3 ký tự
+  const result = await createRoomPage.aserrtGetMessage(expectResult)
+  // Gán actual/expected vào testInfo
+  common.getTestInfo(testInfo, expectResult, result)
+
+  expect(result).toBe(expectResult);
 });
 
-test('TC_CRTROOM_10 - Kiểm tra khi click liên tục button Đăng ký', async({page}) => {  // note làm sau
+test('TC_CRTROOM_10 - Kiểm tra khi click liên tục button Đăng ký', async({page}) => { 
   // Dữ liệu để test
   const roomNumber = '440'; 
   const capacity = room_data.capacity;
@@ -208,7 +257,7 @@ test('TC_CRTROOM_10 - Kiểm tra khi click liên tục button Đăng ký', async
     await createRoomPage.clickButtonCreateRoom();
   }
   await homePage.goToListRoomPage()
-  await listRoomPage.searchRoom(338)
+  await listRoomPage.searchRoom(440)
   // kiểm tra chỉ có 1 phòng được tạo ra cho dù click btn nhiều lần
   await listRoomPage.checkNumberofRoomExist(1)    
 });

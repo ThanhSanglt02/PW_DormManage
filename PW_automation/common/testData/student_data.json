@@ -23,7 +23,7 @@
     "passWord": "password",
 
     "messageIdInvalid": "Mã sinh viên không hợp lệ",
-    "messageIdDuplicate": "Mã sinh viên đã được sử dụng làm tên đăng nhập",
+    "messageIdDuplicate": "Mã sinh viên đã tồn tại",
     "messageRegisterSuccess": "Đăng ký sinh viên thành công!",
     "messageEmailDuplicate": "Email đã tồn tại",
     "messageEmailInvalid": "Email không hợp lệ",

@@ -1,0 +1,245 @@
+[
+  {
+    "title": "TC_CRTROOM_01 - Kiểm tra điều hướng đến trang tạo phòng",
+    "status": "passed",
+    "duration": "1313ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "05/08/2025 13:20:26"
+  },
+  {
+    "title": "TC_CRTROOM_02 - Kiểm tra việc tạo phòng mới thành công với thông tin hợp lệ",
+    "status": "passed",
+    "duration": "3264ms",
+    "expectedStatus": "passed",
+    "expected": "Đăng ký phòng thành công!",
+    "actual": "Đăng ký phòng thành công!",
+    "time": "05/08/2025 13:20:30"
+  },
+  {
+    "title": "TC_CRTROOM_03 - Kiểm tra hệ thống chặn ký tự chữ khi nhập liệu cho trường số phòng",
+    "status": "passed",
+    "duration": "3196ms",
+    "expectedStatus": "passed",
+    "expected": "101",
+    "actual": "101",
+    "time": "05/08/2025 13:20:33"
+  },
+  {
+    "title": "TC_CRTROOM_04 - Kiểm tra việc tạo phòng với số phòng đã tồn tại",
+    "status": "passed",
+    "duration": "3295ms",
+    "expectedStatus": "passed",
+    "expected": "Số phòng đã tồn tại",
+    "actual": "Số phòng đã tồn tại",
+    "time": "05/08/2025 13:20:36"
+  },
+  {
+    "title": "TC_CRTROOM_05 - Kiểm tra hệ thống chặn ký tự đặc biệt khi nhập liệu cho trường số phòng",
+    "status": "passed",
+    "duration": "3213ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "05/08/2025 13:20:39"
+  },
+  {
+    "title": "TC_CRTROOM_06 - Kiểm tra giới hạn ô nhập dữ liệu cho trường số phòng",
+    "status": "failed",
+    "duration": "4784ms",
+    "expectedStatus": "passed",
+    "expected": 3,
+    "actual": 110,
+    "time": "05/08/2025 13:20:44"
+  },
+  {
+    "title": "TC_CRTROOM_07 - Kiểm tra việc giá trị âm cho trường Sức chứa",
+    "status": "failed",
+    "duration": "3244ms",
+    "expectedStatus": "passed",
+    "expected": "Sức chứa không hợp lệ",
+    "actual": "Đăng ký phòng thành công!",
+    "time": "05/08/2025 13:20:49"
+  },
+  {
+    "title": "TC_CRTROOM_08 - Kiểm tra việc nhập giá trị vượt ngưỡng tối đa là 10 cho trường Sức chứa",
+    "status": "failed",
+    "duration": "3283ms",
+    "expectedStatus": "passed",
+    "expected": "Sức chứa không hợp lệ",
+    "actual": "Đăng ký phòng thành công!",
+    "time": "05/08/2025 13:20:53"
+  },
+  {
+    "title": "TC_CRTROOM_09 - Kiểm tra việc nhập giá trị âm cho trường Giá phòng",
+    "status": "failed",
+    "duration": "3224ms",
+    "expectedStatus": "passed",
+    "expected": "Giá phòng không hợp lệ",
+    "actual": "Đăng ký phòng thành công!",
+    "time": "05/08/2025 13:20:57"
+  },
+  {
+    "title": "TC_CRTROOM_10 - Kiểm tra khi click liên tục button Đăng ký",
+    "status": "passed",
+    "duration": "6309ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "05/08/2025 13:21:04"
+  },
+  {
+    "title": "TC_CRTROOM_01 - Kiểm tra điều hướng đến trang tạo phòng",
+    "status": "passed",
+    "duration": "4994ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "12/08/2025 08:10:16"
+  },
+  {
+    "title": "TC_CRTROOM_05 - Kiểm tra hệ thống chặn ký tự đặc biệt khi nhập liệu cho trường số phòng",
+    "status": "interrupted",
+    "duration": "5827ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "12/08/2025 08:10:17"
+  },
+  {
+    "title": "TC_CRTROOM_03 - Kiểm tra hệ thống chặn ký tự chữ khi nhập liệu cho trường số phòng",
+    "status": "interrupted",
+    "duration": "5899ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "12/08/2025 08:10:17"
+  },
+  {
+    "title": "TC_CRTROOM_04 - Kiểm tra việc tạo phòng với số phòng đã tồn tại",
+    "status": "interrupted",
+    "duration": "5916ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "12/08/2025 08:10:17"
+  },
+  {
+    "title": "TC_CRTROOM_02 - Kiểm tra việc tạo phòng mới thành công với thông tin hợp lệ",
+    "status": "interrupted",
+    "duration": "5894ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "12/08/2025 08:10:17"
+  },
+  {
+    "title": "TC_CRTROOM_06 - Kiểm tra giới hạn ô nhập dữ liệu cho trường số phòng",
+    "status": "interrupted",
+    "duration": "5864ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "12/08/2025 08:10:17"
+  },
+  {
+    "title": "TC_CRTROOM_07 - Kiểm tra việc giá trị âm cho trường Sức chứa",
+    "status": "interrupted",
+    "duration": "905ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "12/08/2025 08:10:17"
+  },
+  {
+    "title": "TC_CRTROOM_01 - Kiểm tra điều hướng đến trang tạo phòng",
+    "status": "passed",
+    "duration": "4722ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "12/08/2025 08:10:56"
+  },
+  {
+    "title": "TC_CRTROOM_05 - Kiểm tra hệ thống chặn ký tự đặc biệt khi nhập liệu cho trường số phòng",
+    "status": "passed",
+    "duration": "6417ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "12/08/2025 08:10:57"
+  },
+  {
+    "title": "TC_CRTROOM_03 - Kiểm tra hệ thống chặn ký tự chữ khi nhập liệu cho trường số phòng",
+    "status": "passed",
+    "duration": "6685ms",
+    "expectedStatus": "passed",
+    "expected": "101",
+    "actual": "101",
+    "time": "12/08/2025 08:10:58"
+  },
+  {
+    "title": "TC_CRTROOM_04 - Kiểm tra việc tạo phòng với số phòng đã tồn tại",
+    "status": "passed",
+    "duration": "6699ms",
+    "expectedStatus": "passed",
+    "expected": "Số phòng đã tồn tại",
+    "actual": "Số phòng đã tồn tại",
+    "time": "12/08/2025 08:10:58"
+  },
+  {
+    "title": "TC_CRTROOM_02 - Kiểm tra việc tạo phòng mới thành công với thông tin hợp lệ",
+    "status": "passed",
+    "duration": "6873ms",
+    "expectedStatus": "passed",
+    "expected": "Đăng ký phòng thành công!",
+    "actual": "Đăng ký phòng thành công!",
+    "time": "12/08/2025 08:10:58"
+  },
+  {
+    "title": "TC_CRTROOM_07 - Kiểm tra việc giá trị âm cho trường Sức chứa",
+    "status": "failed",
+    "duration": "3799ms",
+    "expectedStatus": "passed",
+    "expected": "Sức chứa không hợp lệ",
+    "actual": "Đăng ký phòng thành công!",
+    "time": "12/08/2025 08:11:00"
+  },
+  {
+    "title": "TC_CRTROOM_06 - Kiểm tra giới hạn ô nhập dữ liệu cho trường số phòng",
+    "status": "failed",
+    "duration": "9164ms",
+    "expectedStatus": "passed",
+    "expected": 3,
+    "actual": 110,
+    "time": "12/08/2025 08:11:00"
+  },
+  {
+    "title": "TC_CRTROOM_08 - Kiểm tra việc nhập giá trị vượt ngưỡng tối đa là 10 cho trường Sức chứa",
+    "status": "failed",
+    "duration": "3819ms",
+    "expectedStatus": "passed",
+    "expected": "Sức chứa không hợp lệ",
+    "actual": "Đăng ký phòng thành công!",
+    "time": "12/08/2025 08:11:01"
+  },
+  {
+    "title": "TC_CRTROOM_09 - Kiểm tra việc nhập giá trị âm cho trường Giá phòng",
+    "status": "failed",
+    "duration": "3846ms",
+    "expectedStatus": "passed",
+    "expected": "Giá phòng không hợp lệ",
+    "actual": "Đăng ký phòng thành công!",
+    "time": "12/08/2025 08:11:01"
+  },
+  {
+    "title": "TC_CRTROOM_10 - Kiểm tra khi click liên tục button Đăng ký",
+    "status": "passed",
+    "duration": "6966ms",
+    "expectedStatus": "passed",
+    "expected": "N/A",
+    "actual": "N/A",
+    "time": "12/08/2025 08:11:05"
+  }
+]

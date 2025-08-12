@@ -16,6 +16,4 @@ exports.LoginPage = class LoginPage {
         await this.page.click(loginLocators.loginButton);
 
     }
-    
-
 }

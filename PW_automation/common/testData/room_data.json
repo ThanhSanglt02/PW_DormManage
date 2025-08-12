@@ -3,7 +3,7 @@
     "roomNumberLimit": "65465468342342386584680548658406895486084690584906854906859406890548609548609489860854680584906890045860548640",
     "floor": "5",
     "capacity": "2",
-    "price": "1000000",
+    "price": "1000",
     "price_invalid": "-1000",
     "buildingOptions": [
         { "value": "R1", "label": "R1" },
@@ -19,5 +19,11 @@
         { "value": "Room đầy", "label": "Room đầy" },
         { "value": "maintenance", "label": "Đang bảo trì" },
         { "value": "available", "label": "Còn trống" }
-    ]
+    ],
+    "messageIdInvalid": "Số phòng không hợp lệ",
+    "messageIdDuplicate": "Số phòng đã tồn tại",
+    "messageCreateRoomSuccess": "Đăng ký phòng thành công!",
+    "messageCapacityInvalid": "Sức chứa không hợp lệ",
+    "messagePriceInvalid": "Giá phòng không hợp lệ"
+
 }
